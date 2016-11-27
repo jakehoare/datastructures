@@ -1,7 +1,12 @@
 _author_ = 'jake'
 _project_ = 'datastructures'
 
-import heapq, itertools
+# Creates an adaptable priority queue from heapq.
+# Dictionary is used to track entries in priority queue so items can be located in O(1).
+# Removed or updated entries remain in heapq with value of "<REMOVED>" and ignored by pop and peek.
+# Counter is used to ensure pop order is stable with respect to insert or update order.
+
+import heapq
 
 class Apq_heapq():
     def __init__(self):
@@ -42,9 +47,10 @@ if __name__ == "__main__":
     test_apq = Apq_heapq()
     tasks = ['s', 'd', 'r', 'x']
     priorities = [1, 3, 1, 2]
-
     for i in range(len(tasks)):
         test_apq.add_value(tasks[i], priorities[i])
+    test_apq.add_value('x', 1)
+    test_apq.remove_value('s')
     for i in range(len(tasks)):
         print(test_apq.pop_min())
 
