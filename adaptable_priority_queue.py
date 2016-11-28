@@ -1,20 +1,27 @@
 _author_ = 'jake'
 _project_ = 'datastructures'
 
-# Creates an adaptable priority queue from heapq.
-# Dictionary is used to track entries in priority queue so items can be located in O(1).
-# Removed or updated entries remain in heapq with value of "<REMOVED>" and ignored by pop and peek.
-# Counter is used to ensure pop order is stable with respect to insert or update order.
-
 import heapq
 
 class Apq_heapq():
+    """
+    Creates an adaptable priority queue from heapq.
+    Dictionary is used to track entries in priority queue so items can be located in O(1).
+    Removed or updated entries remain in heapq with value of "<REMOVED>" and ignored by pop and peek.
+    Counter is used to ensure pop order is stable with respect to insert or update order.
+    """
     def __init__(self):
         self.heap = []                      # underlying heap
         self.value_mapping = {}             # map from value to entry of [priority, count, value]
         self.counter = 0                    # count breaks priority ties so input/update order is preserved (stable)
 
     def add_value(self, value, priority=0):
+        """
+        Add or update value with specified priority.
+        :param value:
+        :param priority: float
+        :return: None
+        """
         if value in self.value_mapping:     # remove old value from mapping and set to "REMOVED" in heap
             self.remove_value(value)
         entry = [priority, self.counter, value]
@@ -41,16 +48,3 @@ class Apq_heapq():
                 return value
             heapq.heappop(self.heap)        # throw away removed values
         raise KeyError('peek at empty priority queue')
-
-
-if __name__ == "__main__":
-    test_apq = Apq_heapq()
-    tasks = ['s', 'd', 'r', 'x']
-    priorities = [1, 3, 1, 2]
-    for i in range(len(tasks)):
-        test_apq.add_value(tasks[i], priorities[i])
-    test_apq.add_value('x', 1)
-    test_apq.remove_value('s')
-    for i in range(len(tasks)):
-        print(test_apq.pop_min())
-

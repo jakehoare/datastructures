@@ -1,13 +1,14 @@
 _author_ = 'jake'
 _project_ = 'datastructures'
 
-
-# failure[i] is the index in word where we can restart trying to match the text.
-# i.e. failure[i] is the length of the longest proper prefix of word[:i] that is also a proper suffix of word[:i].
-# Proper prefixes of word[:i] cannot include word[i-1], proper suffixes cannot include word[0].
-# Time complexity is O(n) since for every iteration either pos or pos-candidate increases, so runtime is at most 2n.
-
 def failure_function(word):
+    """
+    failure[i] is the length of the longest proper prefix of word[:i] that is also a proper suffix of word[:i].
+    Proper prefixes of word[:i] cannot include word[i-1], proper suffixes cannot include word[0].
+    Time complexity is O(n) since for every iteration either pos or pos-candidate increases, so runtime is at most 2n.
+    :param word: string
+    :return: failure[i] is the index in word where we can restart trying to match the text if word[i] does not match..
+    """
     failure = [-1] + [0 for _ in range(len(word)-1)]
     pos = 2             # the next index of failure table to be computed
     candidate = 0       # the last index in word of proper prefix that may match a suffix
@@ -51,8 +52,4 @@ def kmp_match(word, text):
 
     return -1
 
-if __name__ == "__main__":
-    print(failure_function('ABCDABD'))
-    print(failure_function('AAABAAAB'))
-    print(kmp_match("ABCDABD", "ABC ABCDAB ABCDABCDABDE"))
 
