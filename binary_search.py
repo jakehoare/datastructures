@@ -14,7 +14,7 @@ def binary_search_first_greater(nums, target):
         mid = (left + right) // 2
         mid_value = nums[mid]
 
-        if target >= mid_value:     # if equal, mid is not greater than target os search RHS excluding mid
+        if target >= mid_value:     # if equal, mid is not greater than target so search RHS excluding mid
             left = mid + 1
         else:                       # mid remains a candidate, search LHS including mid
             right = mid
@@ -22,6 +22,6 @@ def binary_search_first_greater(nums, target):
     return nums[left] if left != len(nums) else None
 
 
-search_list = list(range(5, 15))
-target = 11
-print(binary_search_first_greater(search_list, target))
+#search_list = list(range(5, 15))
+#target = 11
+#print(binary_search_first_greater(search_list, target))
